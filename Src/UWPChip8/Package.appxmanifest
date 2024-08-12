@@ -7,15 +7,15 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="7ffa5168-95ab-4104-9fba-3e27f0ef1860"
-    Publisher="CN=MoistDreams"
+    Name="ME.UWPChip8V1"
+    Publisher="CN=Admin"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="7ffa5168-95ab-4104-9fba-3e27f0ef1860" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="7ffa9168-95ab-3304-9fba-3e27f0ef4105" PhonePublisherId="90000002-0003-3300-0007-000000004105"/>
 
   <Properties>
     <DisplayName>UWPChip8</DisplayName>
-    <PublisherDisplayName>Jody Andrews</PublisherDisplayName>
+    <PublisherDisplayName>mediaexplorer</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
@@ -39,6 +39,10 @@
         BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
+        <uap:InitialRotationPreference>
+          <uap:Rotation Preference="landscape"/>
+          <uap:Rotation Preference="portrait"/>
+          <uap:Rotation Preference="landscapeFlipped"/></uap:InitialRotationPreference>
       </uap:VisualElements>
     </Application>
   </Applications>

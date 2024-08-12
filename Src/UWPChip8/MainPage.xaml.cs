@@ -33,7 +33,8 @@ namespace UWPChip8
         readonly Emulator _emulator;
 
         /// <summary>
-        /// Pixel density. A representation of a pixel with a given width/height. Use for scaling to resolutions
+        /// Pixel density. A representation of a pixel with a given width/height. 
+        /// Use for scaling to resolutions
         /// ie. default Chip 8 is 64x32, so for 640x320 the pixel size should be 10.
         /// </summary>
         readonly int pixelSize = 10;
@@ -44,7 +45,8 @@ namespace UWPChip8
         public MainPage()
         {
             this.InitializeComponent();
-            _emulator = new Emulator(); // This could be moved to CreateResources if there were any asset dependencies.
+            _emulator = new Emulator(); // This could be moved to CreateResources
+                                        // if there were any asset dependencies.
         }
 
         /// <summary>
@@ -88,7 +90,8 @@ namespace UWPChip8
 
             args.Handled = true;
 
-            var action = animatedControl.RunOnGameLoopThreadAsync(() => _emulator.ProcessKey(pressedLetter, 0));
+            var action = animatedControl.RunOnGameLoopThreadAsync(
+                () => _emulator.ProcessKey(pressedLetter, 0));
         }
 
         /// <summary>
@@ -107,11 +110,13 @@ namespace UWPChip8
 
             args.Handled = true;
 
-            var action = animatedControl.RunOnGameLoopThreadAsync(() => _emulator.ProcessKey(pressedLetter, 1));
+            var action = animatedControl.RunOnGameLoopThreadAsync(() 
+                => _emulator.ProcessKey(pressedLetter, 1));
         }
 
         /// <summary>
-        /// Converts virtual keys into chars. This is taken from an example on keyboard handling in Win2D
+        /// Converts virtual keys into chars. This is taken from an example
+        /// on keyboard handling in Win2D
         /// </summary>
         /// <param name="args"></param>
         /// <returns></returns>
@@ -148,7 +153,9 @@ namespace UWPChip8
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        private void CanvasAnimatedControl_Update(Microsoft.Graphics.Canvas.UI.Xaml.ICanvasAnimatedControl sender, Microsoft.Graphics.Canvas.UI.Xaml.CanvasAnimatedUpdateEventArgs args)
+        private void CanvasAnimatedControl_Update(
+            Microsoft.Graphics.Canvas.UI.Xaml.ICanvasAnimatedControl sender, 
+            Microsoft.Graphics.Canvas.UI.Xaml.CanvasAnimatedUpdateEventArgs args)
         {
             if (!_emulator.PoweredUp)
                 return;
@@ -161,7 +168,9 @@ namespace UWPChip8
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        private void CanvasAnimatedControl_Draw(Microsoft.Graphics.Canvas.UI.Xaml.ICanvasAnimatedControl sender, Microsoft.Graphics.Canvas.UI.Xaml.CanvasAnimatedDrawEventArgs args)
+        private void CanvasAnimatedControl_Draw(
+            Microsoft.Graphics.Canvas.UI.Xaml.ICanvasAnimatedControl sender, 
+            Microsoft.Graphics.Canvas.UI.Xaml.CanvasAnimatedDrawEventArgs args)
         {
             if (!_emulator.PoweredUp)
                 return;
@@ -173,11 +182,15 @@ namespace UWPChip8
                 {
                     if (displayBuffer[(y * 64) + x] != false)
                     {
-                        args.DrawingSession.FillRectangle(new Windows.Foundation.Rect(x * pixelSize, y * pixelSize, pixelSize, pixelSize), _brush);
+                        args.DrawingSession.FillRectangle(
+                            new Windows.Foundation.Rect(x * pixelSize, 
+                            y * pixelSize, pixelSize, pixelSize), _brush);
                     }
                     else
                     {
-                        args.DrawingSession.FillRectangle(new Windows.Foundation.Rect(x * pixelSize, y * pixelSize, pixelSize, pixelSize), _darkBrush);
+                        args.DrawingSession.FillRectangle(
+                            new Windows.Foundation.Rect(x * pixelSize, y * pixelSize, 
+                            pixelSize, pixelSize), _darkBrush);
                     }
                 }
             }
@@ -188,9 +201,12 @@ namespace UWPChip8
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        private void CanvasAnimatedControl_CreateResources(Microsoft.Graphics.Canvas.UI.Xaml.CanvasAnimatedControl sender, Microsoft.Graphics.Canvas.UI.CanvasCreateResourcesEventArgs args)
+        private void CanvasAnimatedControl_CreateResources(
+            Microsoft.Graphics.Canvas.UI.Xaml.CanvasAnimatedControl sender, 
+            Microsoft.Graphics.Canvas.UI.CanvasCreateResourcesEventArgs args)
         {
-            // Ensure the CreateResources task is completed before considering that the internal create resources is itself completed.
+            // Ensure the CreateResources task is completed before considering
+            // that the internal create resources is itself completed.
             args.TrackAsyncAction(CreateResources(sender).AsAsyncAction());
         }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace Chip8.Core
 {
@@ -385,8 +386,23 @@ namespace Chip8.Core
                 {
                     if ((pixel & (0x80 >> x)) != 0 && ((_v[ay] + y < Config.ScreenHeight)))
                     {
-                        _displayBuffer[(_v[ax] + x + ((_v[ay] + y) * Config.ScreenWidth))] ^= true;
-                        _v[0xF] = _displayBuffer[_v[ax] + x + ((_v[ay] + y) * Config.ScreenWidth)] ? (byte)0 : (byte)1;
+                        try
+                        {
+                            _displayBuffer[(_v[ax] + x + ((_v[ay] + y) * Config.ScreenWidth))] ^= true;
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.WriteLine("[ex] CPU.Instructions - _displayBuffer(...): " + ex.Message);
+                        }
+
+                        try
+                        {
+                            _v[0xF] = _displayBuffer[_v[ax] + x + ((_v[ay] + y) * Config.ScreenWidth)] ? (byte)0 : (byte)1;
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.WriteLine("[ex] CPU.Instructions - _v[0xF]: " +  ex.Message);
+                        }
                     }
                 }
             }
